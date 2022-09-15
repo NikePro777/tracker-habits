@@ -1,1 +1,5 @@
-console.log("hi");
+const habbits = [
+  {
+    img: "./assets/images/coffee.png",
+  },
+];

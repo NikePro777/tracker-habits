@@ -6,34 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./assets/main.css"></script>
+    <link rel="stylesheet" href="assets/main.css" />
   </head>
 
-  <body class="p-10">
-    <header class="flex items-center justify-between mb-5">
-      <h1 class="font-bold text-xl">Chellenges</h1>
-      <button class="text-xl font-semibold">+</button>
+  <body class="py-6 px-8">
+    <header class="flex items-center justify-between mb-10">
+      <h1 class="font-bold text-4xl">Chellenges</h1>
+      <button class="text-5xl font-semibold">+</button>
+      <div
+        class="absolute top-6 right-10 p-5 bg-white shadow-lg rounded-lg hidden"
+      >
+        <label
+          ><input
+            class="outline-none"
+            type="text"
+            placeholder="enter habbit name"
+        /></label>
+        <button class="bg-black text-white cursor-pointer py-1 px-3 rounded">
+          Add
+        </button>
+      </div>
     </header>
 
     <main>
-      <section class="rounded-lg bg-black p-5">
-        <div>You are almost there!</div>
-        <div>
-          <div style="width: 40%">45%</div>
+      <section class="rounded-xl bg-black p-5 mb-10">
+        <div class="text-white font-semibold mb-4 text-2xl text-center">
+          You are almost there!
+        </div>
+        <div
+          class="bg-[#262923] text-center rounded-lg overflow-hidden font-semibold text-lg"
+        >
+          <div class="bg-[#f5f6f7]" style="width: 40%">40%</div>
         </div>
       </section>
       <section>
-        <div>
-          <div>
-            <img src="" alt="" />
-            <span>No coffe</span>
+        <div class="mb-8">
+          <div class="flex items-center gap-4 mb-5">
+            <img
+              width="70"
+              class="rounded-3xl border-2 border-[#e2e4dd] border-solid"
+              src="./assets/images/coffee.png"
+              alt="no coffee"
+            />
+            <span class="font-semibold text-2xl">No caffeine</span>
           </div>
-          <button><!-- icon--></button>
-          <button
-            class="rounded-full border border-dashed border-black h-8 w-8 flex items-center justify-center text-lg uppercase font-semibold"
-          >
-            w
-          </button>
+
+          <div class="flex items-center gap-6">
+            <button
+              class="icon bg-black rounded-full h-10 w-10 flex items-center justify-center"
+            >
+              <img width="45" src="./assets/images/check.svg" alt="check" />
+            </button>
+            <button
+              class="rounded-full border-2 border-solid opacity-20 border-black h-10 w-10 flex items-center justify-center text-lg uppercase font-semibold"
+            >
+              w
+            </button>
+          </div>
         </div>
       </section>
     </main>
