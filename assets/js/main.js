@@ -1,8 +1,17 @@
-import { habits, weekDays } from "./data.js";
+// import { habits, weekDays } from "./data.js";
 // import habits from "./data.js";
 
+const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
+const habits = [
+  {
+    img: "./assets/images/coffee.png",
+    name: "No caffeine",
+    completed: [true, false, false, false, true, false, true],
+  },
+];
+
 const toggleHabit = (target) => {
-  console.log(target.childNodes[0]);
+  console.log(target.childNodes[0] ? target.childNodes : target.parentNode.id);
 };
 
 const getWeekDaysElement = (completed, id) =>
@@ -23,6 +32,7 @@ const getHabitElement = ({ img, name, completed }, index) =>
   </div></div>`;
 
 const habitContainer = document.querySelector(".habit-container");
+
 const render = (habits) => {
   habitContainer.innerHTML = habits
     .map((habit, index) => getHabitElement(habit, index))
@@ -40,14 +50,3 @@ button.forEach((btn) =>
 );
 // console.log(button[6].id);
 // habitContainer.button.addEventListener('click'=toggleHabit)
-class TypedMap extends Map {
-  constructor(keyType, valueType, entries) {
-    // If entries are specified, check their types
-    if (entries) {
-      for (let [k, v] of entries) {
-        if (typeof k !== keyType || typeof v !== valueType) {
-          throw new TypeError(`Wrong type for entry [${k}, ${v}]`);
-        }
-      }
-    }
-
