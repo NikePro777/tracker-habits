@@ -58,11 +58,4 @@ eekDays
   )
   .join("");
 
-const getHabitElement = ({ img, name, completed }, index) =>
-  `<div class="mb-8"><div class="flex items-center gap-4 mb-5"><img width="70" class="rounded-3xl border-2 border-[#e2e4dd] border-solid" src="${img}" alt="no coffee"/>
-  <span class="font-semibold text-2xl">${name}</span></div><div class="flex items-center justify-between habit-plan">${getWeekDaysElement(
-    completed,
-    index
-  )}
-  </div></div>`;
 // habitContainer.button.addEventListener('click'=toggleHabit)
