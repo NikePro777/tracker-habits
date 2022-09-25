@@ -59,3 +59,14 @@ eekDays
   .join("");
 
 // habitContainer.button.addEventListener('click'=toggleHabit)
+
+// console.log(button[6].id);
+eekDays
+  .map((name, index) =>
+    completed[index]
+      ? `<button class="checked bg-black rounded-full h-12 w-12 flex items-center justify-center" id=${id}${index}><img width="45" src="./assets/images/check.svg" alt="check" /></button>`
+      : `<button class="rounded-full border-2 border-solid transition-opacity opacity-20 border-black h-12 w-12 flex items-center justify-center text-lg uppercase font-semibold unchecked" id=${id}${index}>${name}</button>`
+  )
+  .join("");
+
+// habitContainer.button.addEventListener('click'=toggleHabit)
