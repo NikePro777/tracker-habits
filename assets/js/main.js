@@ -8,10 +8,22 @@ const habits = [
     name: "No caffeine",
     completed: [true, false, false, false, true, false, true],
   },
+  {
+    img: "./assets/images/coffee.png",
+    name: "sport",
+    completed: [false, false, false, false, false, false, true],
+  },
 ];
 
 const toggleHabit = (target) => {
-  console.log(target.childNodes[0] ? target.childNodes : target.parentNode.id);
+  console.log("yes");
+  if (target.childNodes[0]) {
+    habits[target.id[0]].completed[target.id[1]] =
+      !habits[target.id[0]].completed[target.id[1]];
+    render(habits);
+  } else {
+    target.parentNode.id;
+  }
 };
 
 const getWeekDaysElement = (completed, id) =>
@@ -50,23 +62,3 @@ button.forEach((btn) =>
 );
 
 // console.log(button[6].id);
-eekDays
-  .map((name, index) =>
-    completed[index]
-      ? `<button class="checked bg-black rounded-full h-12 w-12 flex items-center justify-center" id=${id}${index}><img width="45" src="./assets/images/check.svg" alt="check" /></button>`
-      : `<button class="rounded-full border-2 border-solid transition-opacity opacity-20 border-black h-12 w-12 flex items-center justify-center text-lg uppercase font-semibold unchecked" id=${id}${index}>${name}</button>`
-  )
-  .join("");
-
-// habitContainer.button.addEventListener('click'=toggleHabit)
-
-// console.log(button[6].id);
-eekDays
-  .map((name, index) =>
-    completed[index]
-      ? `<button class="checked bg-black rounded-full h-12 w-12 flex items-center justify-center" id=${id}${index}><img width="45" src="./assets/images/check.svg" alt="check" /></button>`
-      : `<button class="rounded-full border-2 border-solid transition-opacity opacity-20 border-black h-12 w-12 flex items-center justify-center text-lg uppercase font-semibold unchecked" id=${id}${index}>${name}</button>`
-  )
-  .join("");
-
-// habitContainer.button.addEventListener('click'=toggleHabit)
