@@ -1,28 +1,14 @@
-// import { habits, weekDays } from "./data.js";
-// import habits from "./data.js";
-
-const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
-const habits = [
-  {
-    img: "./assets/images/coffee.png",
-    name: "No caffeine",
-    completed: [true, false, false, false, true, false, true],
-  },
-  {
-    img: "./assets/images/coffee.png",
-    name: "sport",
-    completed: [false, false, false, false, false, false, true],
-  },
-];
+import { habits, weekDays } from "./data.js";
 
 const toggleHabit = (target) => {
-  console.log("yes");
   if (target.childNodes[0]) {
     habits[target.id[0]].completed[target.id[1]] =
       !habits[target.id[0]].completed[target.id[1]];
     render(habits);
   } else {
-    target.parentNode.id;
+    habits[target.parentNode.id[0]].completed[target.parentNode.id[1]] =
+      !habits[target.parentNode.id[0]].completed[target.parentNode.id[1]];
+    render(habits);
   }
 };
 
@@ -49,16 +35,12 @@ const render = (habits) => {
   habitContainer.innerHTML = habits
     .map((habit, index) => getHabitElement(habit, index))
     .join("");
+  const button = habitContainer.querySelectorAll("button");
+  button.forEach((btn) =>
+    btn.addEventListener("click", (event) => {
+      const { target } = event;
+      toggleHabit(target);
+    })
+  );
 };
 render(habits);
-
-const button = habitContainer.querySelectorAll("button");
-// console.log(button);
-button.forEach((btn) =>
-  btn.addEventListener("click", (event) => {
-    const { target } = event;
-    toggleHabit(target);
-  })
-);
-
-// console.log(button[6].id);
