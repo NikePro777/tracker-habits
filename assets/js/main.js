@@ -42,5 +42,21 @@ const render = (habits) => {
       toggleHabit(target);
     })
   );
+  // start Progress bar
+  const countDays = habits.length * 7;
+  let count = 0;
+  habits.forEach((habit) => {
+    habit.completed.forEach((completed) => {
+      if (completed) {
+        count++;
+      }
+    });
+  });
+  const percent = count / countDays;
+  console.log(percent);
+  const progressBar = document.querySelector(".progress-bar > div");
+  progressBar.textContent = Math.round(percent * 100) + "%";
+  progressBar.style.width = percent * 100 + "%";
+  // finish Progress bar
 };
 render(habits);
