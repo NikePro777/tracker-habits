@@ -42,6 +42,48 @@ const render = (habits) => {
       toggleHabit(target);
     })
   );
+
+  // start add new habit
+
+  const btnAddForm = document.querySelector("[data='creatHabit']");
+  btnAddForm.addEventListener("click", (event) => {
+    const { target } = event;
+    openForm();
+  });
+  const btnAddHabit = document.querySelector("[data='addNewHabit']");
+  btnAddHabit.addEventListener("click", (event) => {
+    const { target } = event;
+    addNewHabit();
+  });
+
+  const openForm = () => {
+    document.querySelector("#form").classList.remove("hidden");
+  };
+
+  const addNewHabit = () => {
+    const inputElem = document.querySelector("#form input");
+    const value = inputElem.value;
+    document.querySelector("#form").classList.add("hidden");
+    if (!value) {
+      console.log(value);
+      alert("value is required!");
+      return;
+    } else {
+      // document.querySelector("#form input").value = "";
+      const newValue = {
+        img: "./assets/images/coffee.png",
+        name: value,
+        completed: [false, false, false, false, false, false, false],
+      };
+      // value = "";
+      habits[habits.length] = newValue;
+      render(habits);
+      inputElem.value = "";
+    }
+  };
+
+  // finish add habit
+
   // start Progress bar
   const countDays = habits.length * 7;
   let count = 0;
@@ -52,11 +94,10 @@ const render = (habits) => {
       }
     });
   });
-  const percent = count / countDays;
-  console.log(percent);
+  const percent = (count / countDays) * 100;
   const progressBar = document.querySelector(".progress-bar > div");
-  progressBar.textContent = Math.round(percent * 100) + "%";
-  progressBar.style.width = percent * 100 + "%";
+  progressBar.textContent = Math.round(percent) + "%";
+  progressBar.style.width = percent + "%";
   // finish Progress bar
 };
 render(habits);
