@@ -44,44 +44,33 @@ const render = (habits) => {
   );
 
   // start add new habit
-
   const btnAddForm = document.querySelector("[data='creatHabit']");
-  btnAddForm.addEventListener("click", (event) => {
-    const { target } = event;
-    openForm();
-  });
-  const btnAddHabit = document.querySelector("[data='addNewHabit']");
-  btnAddHabit.addEventListener("click", (event) => {
-    const { target } = event;
-    addNewHabit();
-  });
-
-  const openForm = () => {
+  btnAddForm.onclick = () => {
     document.querySelector("#form").classList.remove("hidden");
+    btnAddForm.classList.add("hidden");
   };
-
-  const addNewHabit = () => {
+  const btnAddHabit = document.querySelector("[data='addNewHabit']");
+  btnAddHabit.onclick = () => {
     const inputElem = document.querySelector("#form input");
     const value = inputElem.value;
     document.querySelector("#form").classList.add("hidden");
     if (!value) {
       console.log(value);
       alert("value is required!");
+      btnAddForm.classList.remove("hidden");
       return;
     } else {
-      // document.querySelector("#form input").value = "";
       const newValue = {
         img: "./assets/images/coffee.png",
         name: value,
         completed: [false, false, false, false, false, false, false],
       };
-      // value = "";
       habits[habits.length] = newValue;
+      btnAddForm.classList.remove("hidden");
       render(habits);
       inputElem.value = "";
     }
   };
-
   // finish add habit
 
   // start Progress bar

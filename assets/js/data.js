@@ -3,6 +3,6 @@ export const habits = [
   {
     img: "./assets/images/coffee.png",
     name: "No caffeine",
-    completed: [true, false, false, false, true, false, true],
+    completed: [false, false, false, false, false, false, false],
   },
 ];
