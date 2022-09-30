@@ -5,24 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link href="/assets/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/main.css" />
   </head>
 
   <body class="py-6 px-8 container mx-auto">
-    <header class="flex items-center justify-between mb-10">
+    <header class="flex items-center justify-between mb-6">
       <h1 class="font-bold text-4xl">Chellenges</h1>
       <button class="text-5xl font-semibold" data="creatHabit">+</button>
-      <div id="form" class="top-6 p-4 bg-white shadow-lg rounded-lg hidden">
+      <div
+        id="form"
+        class="flex justify-between mt-5 top-4 p-3 shadow-lg rounded-lg hidden"
+      >
         <label
           ><input
-            class="outline-none"
+            class="outline-none w-4/5"
             type="text"
             placeholder="enter habbit name"
         /></label>
         <button
-          class="bg-black text-white cursor-pointer py-1 px-3 rounded"
+          class="bg-black text-white cursor-pointer py-1 px-3 rounded w-auto"
           data="addNewHabit"
         >
           Add
@@ -31,7 +33,7 @@
     </header>
 
     <main>
-      <section class="rounded-xl bg-black p-5 mb-10">
+      <section class="rounded-xl bg-black p-5 mb-6">
         <div class="text-white font-semibold mb-4 text-2xl text-center">
           You are almost there!
         </div>

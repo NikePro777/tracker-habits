@@ -44,9 +44,12 @@ const render = (habits) => {
   );
 
   // start add new habit
+  const header = document.querySelector("header");
+
   const btnAddForm = document.querySelector("[data='creatHabit']");
   btnAddForm.onclick = () => {
     document.querySelector("#form").classList.remove("hidden");
+    header.classList.remove("flex");
     btnAddForm.classList.add("hidden");
   };
   const btnAddHabit = document.querySelector("[data='addNewHabit']");
@@ -54,6 +57,7 @@ const render = (habits) => {
     const inputElem = document.querySelector("#form input");
     const value = inputElem.value;
     document.querySelector("#form").classList.add("hidden");
+    header.classList.add("flex");
     if (!value) {
       console.log(value);
       alert("value is required!");
