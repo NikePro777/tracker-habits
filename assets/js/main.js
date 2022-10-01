@@ -31,7 +31,7 @@ const getHabitElement = ({ img, name, completed }, index) =>
 
 const habitContainer = document.querySelector(".habit-container");
 
-const render = (habits) => {
+export const render = (habits) => {
   habitContainer.innerHTML = habits
     .map((habit, index) => getHabitElement(habit, index))
     .join("");
@@ -42,55 +42,22 @@ const render = (habits) => {
       toggleHabit(target);
     })
   );
-
-  // start add new habit
-  const header = document.querySelector("header");
-
-  const btnAddForm = document.querySelector("[data='creatHabit']");
-  btnAddForm.onclick = () => {
-    document.querySelector("#form").classList.remove("hidden");
-    header.classList.remove("flex");
-    btnAddForm.classList.add("hidden");
-  };
-  const btnAddHabit = document.querySelector("[data='addNewHabit']");
-  btnAddHabit.onclick = () => {
-    const inputElem = document.querySelector("#form input");
-    const value = inputElem.value;
-    document.querySelector("#form").classList.add("hidden");
-    header.classList.add("flex");
-    if (!value) {
-      console.log(value);
-      alert("value is required!");
-      btnAddForm.classList.remove("hidden");
-      return;
-    } else {
-      const newValue = {
-        img: "./assets/images/coffee.png",
-        name: value,
-        completed: [false, false, false, false, false, false, false],
-      };
-      habits[habits.length] = newValue;
-      btnAddForm.classList.remove("hidden");
-      render(habits);
-      inputElem.value = "";
-    }
-  };
-  // finish add habit
-
-  // start Progress bar
-  const countDays = habits.length * 7;
-  let count = 0;
-  habits.forEach((habit) => {
-    habit.completed.forEach((completed) => {
-      if (completed) {
-        count++;
-      }
-    });
-  });
-  const percent = (count / countDays) * 100;
-  const progressBar = document.querySelector(".progress-bar > div");
-  progressBar.textContent = Math.round(percent) + "%";
-  progressBar.style.width = percent + "%";
-  // finish Progress bar
 };
+
+// start Progress bar
+const countDays = habits.length * 7;
+let count = 0;
+habits.forEach((habit) => {
+  habit.completed.forEach((completed) => {
+    if (completed) {
+      count++;
+    }
+  });
+});
+const percent = (count / countDays) * 100;
+const progressBar = document.querySelector(".progress-bar > div");
+progressBar.textContent = Math.round(percent) + "%";
+progressBar.style.width = percent + "%";
+// finish Progress bar
+
 render(habits);
