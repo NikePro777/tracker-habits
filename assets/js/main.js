@@ -54,9 +54,13 @@ habits.forEach((habit) => {
     }
   });
 });
-const percent = (count / countDays) * 100;
+const percent = count / countDays;
+console.log(isNaN(percent));
 const progressBar = document.querySelector(".progress-bar > div");
-progressBar.textContent = Math.round(percent) + "%";
+console.log(habits);
+progressBar.textContent = isNaN(percent)
+  ? "Нужно больше привычек!"
+  : Math.round(percent) + "%";
 progressBar.style.width = percent + "%";
 // finish Progress bar
 
