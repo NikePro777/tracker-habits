@@ -62,5 +62,5 @@ export const render = (habits) => {
 };
 // finish Progress bar
 
-upload("#file");
+upload("#file", { multi: true });
 render(habits);
