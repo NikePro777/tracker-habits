@@ -61,6 +61,5 @@ export const render = (habits) => {
   progressBar.style.width = percent + "%";
 };
 // finish Progress bar
-
-upload("#file", { multi: true });
+upload("#file", { multi: true, accept: [".png", ".jpeg", ".jpg", ".gif"] });
 render(habits);
