@@ -63,3 +63,18 @@ input[type="file"] {
   cursor: pointer;
   opacity: 0.8;
 }
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+
+.preview-image {
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.preview-image img {
+  width: 180px;
+  height: auto;
+}
