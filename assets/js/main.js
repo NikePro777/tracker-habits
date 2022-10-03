@@ -1,4 +1,5 @@
 import { habits, weekDays } from "./data.js";
+import { upload } from "./upload.js";
 
 const toggleHabit = (target) => {
   if (target.childNodes[0]) {
@@ -42,26 +43,24 @@ export const render = (habits) => {
       toggleHabit(target);
     })
   );
-};
-
-// start Progress bar
-const countDays = habits.length * 7;
-let count = 0;
-habits.forEach((habit) => {
-  habit.completed.forEach((completed) => {
-    if (completed) {
-      count++;
-    }
+  // start Progress bar
+  const countDays = habits.length * 7;
+  let count = 0;
+  habits.forEach((habit) => {
+    habit.completed.forEach((completed) => {
+      if (completed) {
+        count++;
+      }
+    });
   });
-});
-const percent = count / countDays;
-console.log(isNaN(percent));
-const progressBar = document.querySelector(".progress-bar > div");
-console.log(habits);
-progressBar.textContent = isNaN(percent)
-  ? "Нужно больше привычек!"
-  : Math.round(percent) + "%";
-progressBar.style.width = percent + "%";
+  const percent = (count / countDays) * 100;
+  const progressBar = document.querySelector(".progress-bar > div");
+  progressBar.textContent = isNaN(percent)
+    ? "Нужно больше привычек!"
+    : Math.round(percent) + "%";
+  progressBar.style.width = percent + "%";
+};
 // finish Progress bar
 
+upload("#file");
 render(habits);
