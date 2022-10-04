@@ -26,17 +26,24 @@ export function upload(selector, options = {}) {
     }
     //изначально event.target.files это толи какой то особой тип толи обьект, мы его приводим к массиву
     const files = Array.from(event.target.files);
+    preview.innerHTML = "";
     files.forEach((file) => {
       if (!file.type.match("image")) {
         // работать будем только с картинкой
         return;
       }
+
       const reader = new FileReader();
       reader.onload = (ev) => {
         const src = ev.target.result;
+        // здесь афтер бегин означает что наш элемент будет находиться внутри блока превью
         preview.insertAdjacentHTML(
           "afterbegin",
-          `<div class='preview-image'> <img src='${src}' alt='${file.name}'/></div>`
+          `<div class='preview-image'>
+          <div class="preview-remove">&times</div>
+          <img src='${src}' alt='${file.name}'/></div>
+          <div class="preview-info">
+          <span>${file.name}</span>${file.size}</div>`
         );
       };
       reader.readAsDataURL(file);

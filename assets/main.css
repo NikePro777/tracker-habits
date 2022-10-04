@@ -70,6 +70,7 @@ input[type="file"] {
 }
 
 .preview-image {
+  position: relative;
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
 }
@@ -77,4 +78,36 @@ input[type="file"] {
 .preview-image img {
   width: 180px;
   height: auto;
+}
+.preview-remove {
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.22s;
+}
+.preview-image:hover .preview-remove {
+  opacity: 1;
+}
+.preview-info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 25px;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  transition: bottom 0.22s;
 }
