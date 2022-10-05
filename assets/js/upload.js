@@ -1,4 +1,11 @@
+function bytesToSize(bytes) {
+  const sizes = ["Bites", "Kb", "Mb", "Gb", "Tb"];
+  if (!bytes) return "0 Byte";
+  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+  return Math.round(bytes / Math.pow(1024, i)) + " " + sizes[i];
+}
 export function upload(selector, options = {}) {
+  let files = [];
   const input = document.querySelector(selector);
   const preview = document.createElement("div");
   preview.classList.add("preview");
@@ -10,8 +17,7 @@ export function upload(selector, options = {}) {
     input.setAttribute("multiple", true);
   }
   // Чтобы скачать можно было файлы определенных форматов
-  if (options.aссept && Array.isArray(options.accept)) {
-    console.log(options.aссept.join(",").toString());
+  if (options.accept && Array.isArray(options.accept)) {
     input.setAttribute("accept", options.accept.join(","));
   }
   // помещяем наш элемент в конец селектора
@@ -25,7 +31,7 @@ export function upload(selector, options = {}) {
       return;
     }
     //изначально event.target.files это толи какой то особой тип толи обьект, мы его приводим к массиву
-    const files = Array.from(event.target.files);
+    files = Array.from(event.target.files);
     preview.innerHTML = "";
     files.forEach((file) => {
       if (!file.type.match("image")) {
@@ -40,16 +46,26 @@ export function upload(selector, options = {}) {
         preview.insertAdjacentHTML(
           "afterbegin",
           `<div class='preview-image'>
-          <div class="preview-remove">&times</div>
-          <img src='${src}' alt='${file.name}'/></div>
+          <div class="preview-remove" data-name='${file.name}'>&times</div>
+          <img src='${src}' alt='${file.name}'/>
           <div class="preview-info">
-          <span>${file.name}</span>${file.size}</div>`
+          <span>${file.name}</span>${bytesToSize(file.size)}</div></div>`
         );
       };
       reader.readAsDataURL(file);
     });
     console.log(files);
   };
+  const removeHandler = (event) => {
+    if (!event.target.dataset.name) {
+      return;
+    }
+    const { name } = event.target.dataset;
+    console.log(name);
+    // а так можно все дата атрибуты вывести
+    //console.log(event.target.dataset);
+  };
   open.addEventListener("click", triggerInput);
   input.addEventListener("change", changeHandler);
+  preview.addEventListener("click", removeHandler);
 }
