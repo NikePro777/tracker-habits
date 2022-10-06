@@ -69,3 +69,31 @@ export function upload(selector, options = {}) {
   input.addEventListener("change", changeHandler);
   preview.addEventListener("click", removeHandler);
 }
+render = (habits) => {
+  habitContainer.innerHTML = habits
+    .map((habit, index) => getHabitElement(habit, index))
+    .join("");
+  const button = habitContainer.querySelectorAll("button");
+  button.forEach((btn) =>
+    btn.addEventListener("click", (event) => {
+      const { target } = event;
+      toggleHabit(target);
+    })
+  );
+  // start Progress bar
+  const countDays = habits.length * 7;
+  let count = 0;
+  habits.forEach((habit) => {
+    habit.completed.forEach((completed) => {
+      if (completed) {
+        count++;
+      }
+    });
+  });
+  const percent = (count / countDays) * 100;
+  const progressBar = document.querySelector(".progress-bar > div");
+  progressBar.textContent = isNaN(percent)
+    ? "Нужно больше привычек!"
+    : Math.round(percent) + "%";
+  progressBar.style.width = percent + "%";
+};
