@@ -4,15 +4,24 @@ function bytesToSize(bytes) {
   const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
   return Math.round(bytes / Math.pow(1024, i)) + " " + sizes[i];
 }
+// функция позволяющая нам создавать элементы (чтобы каждый раз не прописывать все)
+const element = (tag, classes = [], content) => {
+  const node = document.createElement(tag);
+  if (classes.length) {
+    node.classList.add(...classes);
+  }
+  if (content) {
+    node.textContent = content;
+  }
+  return node;
+};
 export function upload(selector, options = {}) {
   let files = [];
   const input = document.querySelector(selector);
-  const preview = document.createElement("div");
-  preview.classList.add("preview");
-  const open = document.createElement("button");
-  open.classList.add("btn");
-  open.textContent = "open";
-  // Чтобы можно было скачивать много файлов
+  const preview = element("div", ["preview"]);
+  const open = element("button", ["btn"], "open");
+  const upload = element("button", ["btn", "primary"], "Загрузить");
+
   if (options.multi) {
     input.setAttribute("multiple", true);
   }
@@ -22,6 +31,7 @@ export function upload(selector, options = {}) {
   }
   // помещяем наш элемент в конец селектора
   input.insertAdjacentElement("afterend", preview); //afterend означает что контент будет находиться вне нашего блока
+  input.insertAdjacentElement("afterend", upload);
   input.insertAdjacentElement("afterend", open);
 
   // Функция которая по клике на нашу кнопку, вызывает клик по импуту (который открывает вкладку по загрузке файлов)
@@ -54,46 +64,22 @@ export function upload(selector, options = {}) {
       };
       reader.readAsDataURL(file);
     });
-    console.log(files);
   };
   const removeHandler = (event) => {
     if (!event.target.dataset.name) {
       return;
     }
     const { name } = event.target.dataset;
-    console.log(name);
+    files = files.filter((file) => file.name !== name);
     // а так можно все дата атрибуты вывести
     //console.log(event.target.dataset);
+    const block = preview
+      .querySelector(`[data-name='${name}']`)
+      .closest(".preview-image"); // получаем родительский элемент с таким атрибутом
+    block.classList.add("removing"); // Это делаем только чтобы добавить анимацию
+    setTimeout(() => block.remove(), 3000);
   };
   open.addEventListener("click", triggerInput);
   input.addEventListener("change", changeHandler);
   preview.addEventListener("click", removeHandler);
 }
-render = (habits) => {
-  habitContainer.innerHTML = habits
-    .map((habit, index) => getHabitElement(habit, index))
-    .join("");
-  const button = habitContainer.querySelectorAll("button");
-  button.forEach((btn) =>
-    btn.addEventListener("click", (event) => {
-      const { target } = event;
-      toggleHabit(target);
-    })
-  );
-  // start Progress bar
-  const countDays = habits.length * 7;
-  let count = 0;
-  habits.forEach((habit) => {
-    habit.completed.forEach((completed) => {
-      if (completed) {
-        count++;
-      }
-    });
-  });
-  const percent = (count / countDays) * 100;
-  const progressBar = document.querySelector(".progress-bar > div");
-  progressBar.textContent = isNaN(percent)
-    ? "Нужно больше привычек!"
-    : Math.round(percent) + "%";
-  progressBar.style.width = percent + "%";
-};
