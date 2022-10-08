@@ -15,12 +15,17 @@ const element = (tag, classes = [], content) => {
   }
   return node;
 };
+
+function noop() {}
+
 export function upload(selector, options = {}) {
   let files = [];
+  const onUpload = options.onUpload ?? noop;
   const input = document.querySelector(selector);
   const preview = element("div", ["preview"]);
   const open = element("button", ["btn"], "open");
   const upload = element("button", ["btn", "primary"], "Загрузить");
+  upload.style.display = "none";
 
   if (options.multi) {
     input.setAttribute("multiple", true);
@@ -43,6 +48,7 @@ export function upload(selector, options = {}) {
     //изначально event.target.files это толи какой то особой тип толи обьект, мы его приводим к массиву
     files = Array.from(event.target.files);
     preview.innerHTML = "";
+    upload.style.display = "inline";
     files.forEach((file) => {
       if (!file.type.match("image")) {
         // работать будем только с картинкой
@@ -73,13 +79,29 @@ export function upload(selector, options = {}) {
     files = files.filter((file) => file.name !== name);
     // а так можно все дата атрибуты вывести
     //console.log(event.target.dataset);
+    if (!files.length) {
+      upload.style.display = "none";
+    }
     const block = preview
       .querySelector(`[data-name='${name}']`)
       .closest(".preview-image"); // получаем родительский элемент с таким атрибутом
     block.classList.add("removing"); // Это делаем только чтобы добавить анимацию
     setTimeout(() => block.remove(), 3000);
   };
+  const clearPreview = (el) => {
+    el.style.bottom = "0";
+    el.innerHTML = "<div class='preview-info-progress'</div>";
+  };
+  const uploadHandler = () => {
+    // файлы которые пользователь пытается загрузить уже нельзя удалить:
+    preview.querySelectorAll(".preview-remove").forEach((e) => e.remove());
+    const previewInfo = preview.querySelectorAll(".preview-info");
+    previewInfo.forEach(clearPreview);
+    onUpload(files); // т.е те файлы которые мы выбрали будем грузить на сервер
+  };
+
   open.addEventListener("click", triggerInput);
   input.addEventListener("change", changeHandler);
   preview.addEventListener("click", removeHandler);
+  upload.addEventListener("click", uploadHandler);
 }
