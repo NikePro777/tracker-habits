@@ -1,20 +1,6 @@
 import { habits, weekDays } from "./data.js";
 import { upload } from "./upload.js";
 
-import firebase from "../../node_modules/firebase/app";
-import "../../node_modules/firebase/storage";
-const firebaseConfig = {
-  apiKey: "AIzaSyBvYLfTFTpXnEpj0mJF6HMqbQz3UUR0HnU",
-  authDomain: "tracker-habits.firebaseapp.com",
-  projectId: "tracker-habits",
-  storageBucket: "tracker-habits.appspot.com",
-  messagingSenderId: "791699178608",
-  appId: "1:791699178608:web:87f2f9a1c2c983d42320b5",
-};
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const storage = firebase.storage();
-console.log(storage);
 const toggleHabit = (target) => {
   if (target.childNodes[0]) {
     habits[target.id[0]].completed[target.id[1]] =
