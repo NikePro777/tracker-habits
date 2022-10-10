@@ -49,6 +49,41 @@ export function upload(selector, options = {}) {
     files = Array.from(event.target.files);
     preview.innerHTML = "";
     upload.style.display = "inline";
+    function CompressImage(base64) {
+      const canvas = document.createElement("canvas");
+      const img = document.createElement("img");
+      img.onload = function () {
+        let width = img.width;
+        let height = img.height;
+        const maxHeight = 100;
+        const maxWidth = 100;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height *= maxWidth / width));
+            width = maxWidth;
+          }
+
+          let photoClass = "photoH";
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width *= maxHeight / height));
+            height = maxHeight;
+          }
+          let photoClass = "photoV";
+        }
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        let compressedData = canvas.toDataURL("image/jpeg", 0.1);
+      };
+      img.onerror = function (err) {
+        reject(err);
+      };
+      img.src = base64;
+    }
     files.forEach((file) => {
       if (!file.type.match("image")) {
         // работать будем только с картинкой
@@ -58,12 +93,15 @@ export function upload(selector, options = {}) {
       const reader = new FileReader();
       reader.onload = (ev) => {
         const src = ev.target.result;
+        let originalImage = new Image();
+        originalImage.src = ev.target.result;
+        CompressImage(originalImage.src);
         // здесь афтер бегин означает что наш элемент будет находиться внутри блока превью
         preview.insertAdjacentHTML(
           "afterbegin",
           `<div class='preview-image'>
           <div class="preview-remove" data-name='${file.name}'>&times</div>
-          <img src='${src}' alt='${file.name}'/>
+          <img src='${originalImage.src}' alt='${file.name}'/>
           <div class="preview-info">
           <span>${file.name}</span>${bytesToSize(file.size)}</div></div>`
         );
