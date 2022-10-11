@@ -107,7 +107,7 @@ input[type="file"] {
 .preview-info {
   position: absolute;
   right: 0;
-  bottom: -30px;
+  bottom: -300px;
   left: 0;
   height: 24px;
   font-size: 0.8rem;
@@ -116,7 +116,7 @@ input[type="file"] {
   align-items: center;
   justify-content: space-between;
   padding: 0 5px;
-  transition: bottom 0.5s;
+  transition: bottom 0.3s;
 }
 .preview-info-progress {
   position: absolute;

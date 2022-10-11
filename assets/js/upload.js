@@ -23,9 +23,9 @@ export function upload(selector, options = {}) {
   const onUpload = options.onUpload ?? noop;
   const input = document.querySelector(selector);
   const preview = element("div", ["preview"]);
-  const open = element("button", ["btn"], "open");
-  const upload = element("button", ["btn", "primary"], "Загрузить");
-  upload.style.display = "none";
+  const open = element("button", ["btn"], "Загрузить картинку");
+  // const upload = element("button", ["btn", "primary"], "Загрузить");
+  // upload.style.display = "none";
 
   if (options.multi) {
     input.setAttribute("multiple", true);
@@ -36,7 +36,7 @@ export function upload(selector, options = {}) {
   }
   // помещяем наш элемент в конец селектора
   input.insertAdjacentElement("afterend", preview); //afterend означает что контент будет находиться вне нашего блока
-  input.insertAdjacentElement("afterend", upload);
+  // input.insertAdjacentElement("afterend", upload);
   input.insertAdjacentElement("afterend", open);
 
   // Функция которая по клике на нашу кнопку, вызывает клик по импуту (который открывает вкладку по загрузке файлов)
@@ -48,42 +48,8 @@ export function upload(selector, options = {}) {
     //изначально event.target.files это толи какой то особой тип толи обьект, мы его приводим к массиву
     files = Array.from(event.target.files);
     preview.innerHTML = "";
-    upload.style.display = "inline";
-    function CompressImage(base64) {
-      const canvas = document.createElement("canvas");
-      const img = document.createElement("img");
-      img.onload = function () {
-        let width = img.width;
-        let height = img.height;
-        const maxHeight = 100;
-        const maxWidth = 100;
+    // upload.style.display = "inline";
 
-        if (width > height) {
-          if (width > maxWidth) {
-            height = Math.round((height *= maxWidth / width));
-            width = maxWidth;
-          }
-
-          let photoClass = "photoH";
-        } else {
-          if (height > maxHeight) {
-            width = Math.round((width *= maxHeight / height));
-            height = maxHeight;
-          }
-          let photoClass = "photoV";
-        }
-        canvas.width = width;
-        canvas.height = height;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, width, height);
-        let compressedData = canvas.toDataURL("image/jpeg", 0.1);
-      };
-      img.onerror = function (err) {
-        reject(err);
-      };
-      img.src = base64;
-    }
     files.forEach((file) => {
       if (!file.type.match("image")) {
         // работать будем только с картинкой
@@ -93,15 +59,17 @@ export function upload(selector, options = {}) {
       const reader = new FileReader();
       reader.onload = (ev) => {
         const src = ev.target.result;
-        let originalImage = new Image();
-        originalImage.src = ev.target.result;
-        CompressImage(originalImage.src);
+        // let originalImage = new Image();
+        // originalImage.src = ev.target.result;
+        // CompressImage(originalImage.src);
+
         // здесь афтер бегин означает что наш элемент будет находиться внутри блока превью
         preview.insertAdjacentHTML(
           "afterbegin",
           `<div class='preview-image'>
           <div class="preview-remove" data-name='${file.name}'>&times</div>
-          <img src='${originalImage.src}' alt='${file.name}'/>
+          <img width="70" class="rounded-3xl border-2 border-[#e2e4dd] border-solid"
+           src='${src}' alt='${file.name}'/>
           <div class="preview-info">
           <span>${file.name}</span>${bytesToSize(file.size)}</div></div>`
         );
@@ -117,9 +85,9 @@ export function upload(selector, options = {}) {
     files = files.filter((file) => file.name !== name);
     // а так можно все дата атрибуты вывести
     //console.log(event.target.dataset);
-    if (!files.length) {
-      upload.style.display = "none";
-    }
+    // if (!files.length) {
+    //   upload.style.display = "none";
+    // }
     const block = preview
       .querySelector(`[data-name='${name}']`)
       .closest(".preview-image"); // получаем родительский элемент с таким атрибутом
@@ -130,16 +98,16 @@ export function upload(selector, options = {}) {
     el.style.bottom = "0";
     el.innerHTML = "<div class='preview-info-progress'</div>";
   };
-  const uploadHandler = () => {
-    // файлы которые пользователь пытается загрузить уже нельзя удалить:
-    preview.querySelectorAll(".preview-remove").forEach((e) => e.remove());
-    const previewInfo = preview.querySelectorAll(".preview-info");
-    previewInfo.forEach(clearPreview);
-    onUpload(files); // т.е те файлы которые мы выбрали будем грузить на сервер
-  };
+  // const uploadHandler = () => {
+  //   // файлы которые пользователь пытается загрузить уже нельзя удалить:
+  //   preview.querySelectorAll(".preview-remove").forEach((e) => e.remove());
+  //   const previewInfo = preview.querySelectorAll(".preview-info");
+  //   previewInfo.forEach(clearPreview);
+  //   onUpload(files); // т.е те файлы которые мы выбрали будем грузить на сервер
+  // };
 
   open.addEventListener("click", triggerInput);
   input.addEventListener("change", changeHandler);
   preview.addEventListener("click", removeHandler);
-  upload.addEventListener("click", uploadHandler);
+  // upload.addEventListener("click", uploadHandler);
 }
