@@ -128,3 +128,8 @@ input[type="file"] {
   transition: width 0.4s;
   width: 30%;
 }
+.draw-image {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+}

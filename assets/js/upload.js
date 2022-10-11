@@ -69,15 +69,15 @@ export function upload(selector, options = {}) {
         CompressImage(originalImage.src);
         // console.log(img);
         // здесь афтер бегин означает что наш элемент будет находиться внутри блока превью
-        // preview.insertAdjacentHTML(
-        //   "afterbegin",
-        //   `<div class='preview-image'>
-        //   <div class="preview-remove" data-name='${file.name}'>&times</div>
-        //   <img width="70" class="rounded-3xl border-2 border-[#e2e4dd] border-solid"
-        //    src='${src}' alt='${file.name}'/>
-        //   <div class="preview-info">
-        //   <span>${file.name}</span>${bytesToSize(file.size)}</div></div>`
-        // );
+        preview.insertAdjacentHTML(
+          "afterbegin",
+          `<div class='preview-image'>
+          <div class="preview-remove" data-name='${file.name}'>&times</div>
+          <img width="70" class="rounded-3xl border-2 border-[#e2e4dd] border-solid"
+           src='${src}' alt='${file.name}'/>
+          <div class="preview-info">
+          <span>${file.name}</span>${bytesToSize(file.size)}</div></div>`
+        );
       };
       reader.readAsDataURL(file);
     });

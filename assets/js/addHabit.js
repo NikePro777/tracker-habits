@@ -24,7 +24,7 @@ btnAddHabit.onclick = () => {
     return;
   } else {
     const newValue = {
-      img: picture,
+      img: picture || "../assets/images/coffee.png",
       name: value,
       completed: [false, false, false, false, false, false, false],
     };

@@ -21,9 +21,9 @@ const getWeekDaysElement = (completed, id) =>
         : `<button class="rounded-full border-2 border-solid transition-opacity opacity-20 border-black h-12 w-12 flex items-center justify-center text-lg uppercase font-semibold unchecked" id=${id}${index}>${name}</button>`
     )
     .join("");
-
+// width='70' height='70'
 const getHabitElement = ({ img, name, completed }, index) =>
-  `<div class="mb-8"><div class="flex items-center gap-4 mb-5"><img width="70" class="rounded-3xl border-2 border-[#e2e4dd] border-solid" src="${img}" alt="no coffee"/>
+  `<div class="mb-8"><div class="flex items-center gap-4 mb-5"><img class="draw-image rounded-3xl border-2 border-[#e2e4dd] border-solid" src="${img}" alt="no coffee"/>
   <span class="font-semibold text-2xl">${name}</span></div><div class="flex items-center justify-between habit-plan">${getWeekDaysElement(
     completed,
     index
