@@ -33,6 +33,7 @@ const getHabitElement = ({ img, name, completed }, index) =>
 const habitContainer = document.querySelector(".habit-container");
 
 export const render = (habits) => {
+  console.log(habits);
   habitContainer.innerHTML = habits
     .map((habit, index) => getHabitElement(habit, index))
     .join("");

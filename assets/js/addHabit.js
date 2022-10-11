@@ -1,6 +1,6 @@
 // start add new habit
 import { render } from "./main.js";
-import { habits } from "./data.js";
+import { habits, changeLS } from "./data.js";
 import { picture } from "./compressImage.js";
 
 const dialog = document.querySelector("dialog");
@@ -28,7 +28,8 @@ btnAddHabit.onclick = () => {
       name: value,
       completed: [false, false, false, false, false, false, false],
     };
-    habits[habits.length] = newValue;
+    console.log(newValue);
+    changeLS(newValue);
     dialog.close();
     render(habits);
     inputElem.value = "";
