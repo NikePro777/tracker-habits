@@ -1,6 +1,7 @@
 // start add new habit
 import { render } from "./main.js";
 import { habits } from "./data.js";
+import { picture } from "./compressImage.js";
 
 const dialog = document.querySelector("dialog");
 const btnAddForm = document.querySelector("[data='creatHabit']");
@@ -23,7 +24,7 @@ btnAddHabit.onclick = () => {
     return;
   } else {
     const newValue = {
-      img: "./assets/images/coffee.png",
+      img: picture,
       name: value,
       completed: [false, false, false, false, false, false, false],
     };

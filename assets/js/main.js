@@ -62,7 +62,7 @@ export const render = (habits) => {
 };
 // finish Progress bar
 upload("#file", {
-  multi: true,
+  multi: false,
   accept: [".png", ".jpeg", ".jpg", ".gif"],
   onUpload(files) {
     console.log("files ", files);
