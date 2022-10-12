@@ -1,7 +1,4 @@
-// import { habits } from "./data";
-// export
 let picture;
-// export
 function CompressImage(base64) {
   const canvas = document.createElement("canvas");
   const img = document.createElement("img");

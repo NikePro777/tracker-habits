@@ -1,5 +1,3 @@
-// import { CompressImage } from "./compressImage.js";
-
 function bytesToSize(bytes) {
   const sizes = ["Bites", "Kb", "Mb", "Gb", "Tb"];
   if (!bytes) return "0 Byte";
@@ -18,18 +16,11 @@ const element = (tag, classes = [], content) => {
   return node;
 };
 
-function noop() {}
-
-// export
 function upload(selector, options = {}) {
   let files = [];
-  const onUpload = options.onUpload ?? noop;
   const input = document.querySelector(selector);
   const preview = element("div", ["preview"]);
   const open = element("button", ["btn"], "Загрузить картинку");
-  // const upload = element("button", ["btn", "primary"], "Загрузить");
-  // upload.style.display = "none";
-
   if (options.multi) {
     input.setAttribute("multiple", true);
   }

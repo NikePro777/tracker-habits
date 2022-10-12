@@ -1,8 +1,3 @@
-// start add new habit
-// import { render } from "./main.js";
-// import { habits, changeLS } from "./data.js";
-// import { picture } from "./compressImage.js";
-
 const dialog = document.querySelector("dialog");
 const btnAddForm = document.querySelector("[data='creatHabit']");
 const btnCancel = dialog.querySelector('[data="cancelBtn"]');
@@ -35,4 +30,3 @@ btnAddHabit.onclick = () => {
     render(habits);
   }
 };
-// finish add habit
