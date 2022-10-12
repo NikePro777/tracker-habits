@@ -12,6 +12,7 @@ btnAddForm.onclick = () => {
 btnCancel.onclick = () => {
   dialog.close();
   inputElem.value = "";
+  dialog.querySelector(".preview").innerHTML = "";
 };
 const btnAddHabit = document.querySelector("[data='addNewHabit']");
 const inputElem = document.querySelector("#form input");
@@ -30,9 +31,8 @@ btnAddHabit.onclick = () => {
     };
     console.log(newValue);
     changeLS(newValue);
-    dialog.close();
+    btnCancel.onclick();
     render(habits);
-    inputElem.value = "";
   }
 };
 // finish add habit

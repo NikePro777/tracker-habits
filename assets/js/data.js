@@ -12,19 +12,15 @@ export const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 // localStorage.clear();
 let loadLS = localStorage.getItem("habits");
 export let habits;
+loadLS ? (habits = JSON.parse(loadLS)) : (habits = []);
 
 export const changeLS = function (item) {
   let obg = JSON.parse(localStorage.getItem("habits"));
-  console.log(obg);
-  if (!loadLS) {
+  if (!Array.isArray(obg)) {
     localStorage.clear();
     obg = [];
   }
-  console.log(obg);
   obg.push(item);
-  console.log(obg);
   localStorage.setItem("habits", JSON.stringify(obg));
-  habits = JSON.parse(loadLS);
-  console.log(habits);
+  habits = JSON.parse(localStorage.getItem("habits"));
 };
-loadLS ? (habits = JSON.parse(loadLS)) : (habits = []);
