@@ -1,4 +1,4 @@
-import { CompressImage } from "./compressImage.js";
+// import { CompressImage } from "./compressImage.js";
 
 function bytesToSize(bytes) {
   const sizes = ["Bites", "Kb", "Mb", "Gb", "Tb"];
@@ -20,7 +20,8 @@ const element = (tag, classes = [], content) => {
 
 function noop() {}
 
-export function upload(selector, options = {}) {
+// export
+function upload(selector, options = {}) {
   let files = [];
   const onUpload = options.onUpload ?? noop;
   const input = document.querySelector(selector);

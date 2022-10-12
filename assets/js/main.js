@@ -1,5 +1,5 @@
-import { habits, weekDays } from "./data.js";
-import { upload } from "./upload.js";
+// import { habits, weekDays } from "./data.js";
+// import { upload } from "./upload.js";
 
 const toggleHabit = (target) => {
   if (target.childNodes[0]) {
@@ -32,7 +32,8 @@ const getHabitElement = ({ img, name, completed }, index) =>
 
 const habitContainer = document.querySelector(".habit-container");
 
-export const render = (habits) => {
+// export
+const render = (habits) => {
   localStorage.setItem("habits", JSON.stringify(habits));
   console.log(habits);
   habitContainer.innerHTML = habits
