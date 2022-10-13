@@ -1,4 +1,5 @@
 let picture;
+let oldSize;
 function CompressImage(base64) {
   const canvas = document.createElement("canvas");
   const img = document.createElement("img");
@@ -22,14 +23,25 @@ function CompressImage(base64) {
     // }
     canvas.width = width;
     canvas.height = height;
-
     // canvas.width = 70;
     // canvas.height = 70;
 
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0, width, height);
-
-    let compressedData = canvas.toDataURL("image/jpeg", 1);
+    function compress(oldSize) {
+      if (oldSize / 1000 > 5000) {
+        return 0.07;
+      } else {
+        if (oldSize / 1000 > 1000) {
+          return 0.1;
+        }
+        if (oldSize / 1000 > 1) {
+          return 0.4;
+        }
+        return 0.9;
+      }
+    }
+    let compressedData = canvas.toDataURL("image/jpeg", compress(oldSize));
     picture = compressedData;
   };
   img.onerror = function (err) {

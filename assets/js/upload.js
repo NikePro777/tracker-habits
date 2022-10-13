@@ -49,17 +49,13 @@ function upload(selector, options = {}) {
         // работать будем только с картинкой
         return;
       }
-
+      oldSize = file.size;
       const reader = new FileReader();
       reader.onload = (ev) => {
         const src = ev.target.result;
         let originalImage = new Image();
         originalImage.src = ev.target.result;
-        // console.log(originalImage);
-        // console.log(originalImage.src);
-
         CompressImage(originalImage.src);
-        // console.log(img);
         // здесь афтер бегин означает что наш элемент будет находиться внутри блока превью
         preview.insertAdjacentHTML(
           "afterbegin",

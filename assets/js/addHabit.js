@@ -24,7 +24,6 @@ btnAddHabit.onclick = () => {
       name: value,
       completed: [false, false, false, false, false, false, false],
     };
-    console.log(newValue);
     changeLS(newValue);
     btnCancel.onclick();
     render(habits);

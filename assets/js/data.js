@@ -10,7 +10,6 @@ const changeLS = function (item) {
     obg = [];
   }
   obg.push(item);
-  console.log(item.image);
   localStorage.setItem("habits", JSON.stringify(obg));
   habits = JSON.parse(localStorage.getItem("habits"));
 };

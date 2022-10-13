@@ -31,7 +31,6 @@ const habitContainer = document.querySelector(".habit-container");
 
 const render = (habits) => {
   localStorage.setItem("habits", JSON.stringify(habits));
-  console.log(habits);
   habitContainer.innerHTML = habits
     .map((habit, index) => getHabitElement(habit, index))
     .join("");
